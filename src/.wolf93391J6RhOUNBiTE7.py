@@ -1,9 +1,4 @@
 from room import Room
-from player import Player
-from item import Item
-import textwrap
-import os
-
 
 # Declare all the rooms
 
@@ -25,6 +20,17 @@ chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south."""),
 }
 
+# **** Test Printing ****
+# for i in room:
+#     print(i)
+
+# print(room['outside'])
+# print(room['foyer'])
+# print(room['overlook'])
+# print(room['narrow'])
+# print(room['treasure'])
+
+
 # Link rooms together
 
 room['outside'].n_to = room['foyer']
@@ -39,60 +45,11 @@ room['treasure'].s_to = room['narrow']
 #
 # Main
 #
-
-sword = Item('sword', 'Very big sword', '5')
-bow = Item('bow', 'so fast', '3')
-
-playerName = input("Your name: ")
+playerName = input("")
 
 # Make a new player object that is currently in the 'outside' room.
-player = Player(playerName, current_room=room['outside'])
-os.system('cls' if os.name == 'nt' else 'clear')
-print(f'Welcome {player.name} \n_________________________________________')
-
-# Print Testing
-print('---------------------\n')
-
-# Player Inventory
-player.check_inventory()
-
-# Player Status
-player.check_status()
-
-# Check for items
-player.check_for_items()
-
-# Add items to rooom
-room['outside'].add_item(sword)
-room['outside'].add_item(bow)
-print(room['outside'])
-
-
-print('---------------------\n')
 
 # Write a loop that:
-
-selection = str(input("[N] Move North  [S] Move South  [Q] Quit\n"))
-
-while not selection == 'Q' or 'q':
-    if selection == 'N' or 'n':
-        print(selection)
-        print("Moved North")
-        print(player.check_status)
-        print(player.current_room.description)
-
-    elif selection == 'S' or 's':
-        print("Moved South")
-        print(player.current_room.name)
-        print(player.current_room.description)
-
-    else:
-        print("Invalid selection")
-
-    # os.system('cls' if os.name == 'nt' else 'clear')
-
-    print('_________________________________________')
-    selection = str(input("[N] Move North  [S] Move South  [Q] Quit\n"))
 #
 # * Prints the current room name
 # * Prints the current description (the textwrap module might be useful here).
