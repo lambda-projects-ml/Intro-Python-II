@@ -12,18 +12,34 @@ class Player:
         self.sheild = 10
         self.carryWeight = 10
 
+# Move player
     def move(self, new_room):
-        if new_room == 'N':
-            self.current_room = self.current_room.n_to
-        elif new_room == 'S':
-            self.current_room = self.current_room.s_to
-        elif new_room == 'E':
-            self.current_room = self.current_room.e_to
-        elif new_room == 'W':
-            self.current_room = self.current_room.w_to
+        new_room = new_room.lower()
+
+        if new_room == 'n':
+            if self.current_room.n_to == 'none':
+                print("No room that directions \n")
+            else:
+                self.current_room = self.current_room.n_to
+        elif new_room == 's':
+            if self.current_room.s_to == 'none':
+                print("No room that directions \n")
+            else:
+                self.current_room = self.current_room.s_to
+        elif new_room == 'e':
+            if self.current_room.e_to == 'none':
+                print("No room that directions \n")
+            else:
+                self.current_room = self.current_room.e_to
+        elif new_room == 'w':
+            if self.current_room.w_to == 'none':
+                print("No room that directions \n")
+            else:
+                self.current_room = self.current_room.w_to
 
 
 # Check Inventory
+
 
     def check_inventory(self):
         print("Inventory:")
@@ -48,10 +64,24 @@ class Player:
 
 # Pickup item
     def pickup_item(self, item):
-        if item in self.current_room.items:
-            self.inventory.append(item)
+        x=0 
+        if len(self.current_room.items) == 0:
+            print("No items to pickup")
         else:
-            print('Item not in the room')
+            for i in self.current_room.items:
+                if i.name.capitalize() == item.capitalize():
+                    self.inventory.append(i)
+                    print(f'You picked up a {i.name}')
+                    x= 1
+                
+            if x==0:
+                print("No items in the room")
+
+    def drop_item(self, item):
+        if item in self.inventory:
+            self.inventory.remove(item)
+        else:
+            print("Item not in invetory")
 
     def __str__(self):
         return f'Player: {self.name}  {self.current_room}'

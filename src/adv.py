@@ -36,65 +36,65 @@ room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
+sword = Item('sword', 'Very big sword', '5')
+bow = Item('bow', 'so fast', '3')
+room['outside'].add_item(sword)
+room['outside'].add_item(bow)
 #
 # Main
 #
 
-sword = Item('sword', 'Very big sword', '5')
-bow = Item('bow', 'so fast', '3')
-
+os.system('cls' if os.name == 'nt' else 'clear')
+print('****** Adventure Game ****** \n')
 playerName = input("Your name: ")
 
 # Make a new player object that is currently in the 'outside' room.
 player = Player(playerName, current_room=room['outside'])
 os.system('cls' if os.name == 'nt' else 'clear')
-print(f'Welcome {player.name} \n_________________________________________')
-
-# Print Testing
-# print('---------------------\n')
-# # Add items to rooom
-# room['outside'].add_item(sword)
-# room['outside'].add_item(bow)
-# print(room['outside'])
-
-# # Player Inventory
-# player.add_to_inventory(sword)
-# player.add_to_inventory(bow)
-# player.check_inventory()
-
-# # Player Status
-# player.pickup_item('bow')
-# player.check_status()
-
-# # Check for items
-# player.check_for_items()
-# print(type(player.current_room.items[0]))
-
-
-# print('---------------------\n')
+print('****** Adventure Game ****** \n')
+print(
+    f'\nWelcome {player.name} \n\n_________________________________________')
 
 # Write a loop that:
-
 selection = str(
-    input("[N] Move North  [S] Move South  [P] Pick Up Item  [Q] Quit\n"))
+    input("[N] Move North  [S] Move South  [E] Move East  [W] Move West  \n[I] Inventory  [P] Pick Up Item  [D] Drop Item  [Q] Quit\n"))
 selection = selection.upper()
 os.system('cls' if os.name == 'nt' else 'clear')
 
 while not selection == 'Q':
+    print('****** Adventure Game ****** \n')
     if selection == 'N':
         player.move(selection)
-        print("Moved North")
         player.check_status()
 
     elif selection == 'S':
         player.move(selection)
-        print("Moved South")
+        player.check_status()
+
+    elif selection == 'E':
+        player.move(selection)
+        player.check_status()
+
+    elif selection == 'W':
+        player.move(selection)
         player.check_status()
 
     elif selection == 'P':
         selection = str(input("Pickup item: "))
+        print('\n')
         player.pickup_item(selection)
+        print('\n')
         player.check_status()
+
+    elif selection == 'I':
+        player.check_inventory()
+
+    elif selection == 'D':
+        selection = str(input("Which item would you like to drop?  "))
+        player.drop_item(selection)
+
+    elif selection == '.':
+        player.check_for_items()
 
     elif selection == 'Q':
         print('Goodbye')
@@ -105,7 +105,7 @@ while not selection == 'Q':
 
     print('_________________________________________')
     selection = str(
-        input("[N] Move North  [S] Move South  [P] Pick Up Item [Q] Quit\n"))
+        input("[N] Move North  [S] Move South  [E] Move East  [W] Move West  \n[I] Inventory  [P] Pick Up Item  [D] Drop Item  [Q] Quit\n"))
     selection = selection.upper()
     os.system('cls' if os.name == 'nt' else 'clear')
 
