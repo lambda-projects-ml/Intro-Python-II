@@ -8,9 +8,10 @@ class Room:
         self.name = name
         self.description = description
         self.items = []
+        self.n_to = 'none'
+        self.s_to = 'none'
+        self.w_to = 'none'
+        self.e_to = 'none'
 
     def add_item(self, item):
         self.items.append(item)
-
-    def __str__(self):
-        return f'Room:\n  Location: {self.name.capitalize()} \n  Description: {self.description}'

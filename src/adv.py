@@ -51,48 +51,65 @@ os.system('cls' if os.name == 'nt' else 'clear')
 print(f'Welcome {player.name} \n_________________________________________')
 
 # Print Testing
-print('---------------------\n')
+# print('---------------------\n')
+# # Add items to rooom
+# room['outside'].add_item(sword)
+# room['outside'].add_item(bow)
+# print(room['outside'])
 
-# Player Inventory
-player.check_inventory()
+# # Player Inventory
+# player.add_to_inventory(sword)
+# player.add_to_inventory(bow)
+# player.check_inventory()
 
-# Player Status
-player.check_status()
+# # Player Status
+# player.pickup_item('bow')
+# player.check_status()
 
-# Check for items
-player.check_for_items()
-
-# Add items to rooom
-room['outside'].add_item(sword)
-room['outside'].add_item(bow)
-print(room['outside'])
+# # Check for items
+# player.check_for_items()
+# print(type(player.current_room.items[0]))
 
 
-print('---------------------\n')
+# print('---------------------\n')
 
 # Write a loop that:
 
-selection = str(input("[N] Move North  [S] Move South  [Q] Quit\n"))
+selection = str(
+    input("[N] Move North  [S] Move South  [P] Pick Up Item  [Q] Quit\n"))
+selection = selection.upper()
+os.system('cls' if os.name == 'nt' else 'clear')
 
-while not selection == 'Q' or 'q':
-    if selection == 'N' or 'n':
-        print(selection)
+while not selection == 'Q':
+    if selection == 'N':
+        player.move(selection)
         print("Moved North")
-        print(player.check_status)
-        print(player.current_room.description)
+        player.check_status()
 
-    elif selection == 'S' or 's':
+    elif selection == 'S':
+        player.move(selection)
         print("Moved South")
-        print(player.current_room.name)
-        print(player.current_room.description)
+        player.check_status()
+
+    elif selection == 'P':
+        selection = str(input("Pickup item: "))
+        player.pickup_item(selection)
+        player.check_status()
+
+    elif selection == 'Q':
+        print('Goodbye')
+        break
 
     else:
         print("Invalid selection")
 
-    # os.system('cls' if os.name == 'nt' else 'clear')
-
     print('_________________________________________')
-    selection = str(input("[N] Move North  [S] Move South  [Q] Quit\n"))
+    selection = str(
+        input("[N] Move North  [S] Move South  [P] Pick Up Item [Q] Quit\n"))
+    selection = selection.upper()
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+
 #
 # * Prints the current room name
 # * Prints the current description (the textwrap module might be useful here).
