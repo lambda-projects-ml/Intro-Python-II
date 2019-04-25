@@ -71,6 +71,7 @@ class Player:
                 if i.name.capitalize() == item.capitalize():
                     self.inventory.append(i)
                     self.current_room.items.remove(i)
+                    self.carryWeight -= int(i.weight)
                     print(f'You picked up a {i.name}')
                     x = 1
 
@@ -86,6 +87,7 @@ class Player:
                 if i.name.capitalize() == item.capitalize():
                     self.inventory.remove(i)
                     self.current_room.items.append(i)
+                    self.carryWeight += int(i.weight)
                     print(f'You dropped a {i.name}\n')
                     x = 1
 

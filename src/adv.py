@@ -43,11 +43,12 @@ random = random.choice(list(room.keys()))
 # Create Items
 sword = Item('sword', 'Very big sword', '5')
 bow = Item('bow', 'so fast', '3')
+light = Item('light', 'much bright', '1')
 key = Item('key', 'The one and only', '1')
 
 # Assign items to room
 room[random].add_item(sword)
-room[random].add_item(bow)
+room['outside'].add_item(bow)
 room[random].add_item(key)
 
 
