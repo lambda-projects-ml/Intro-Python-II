@@ -55,7 +55,6 @@ room[random].add_item(key)
 #
 # Main
 #
-
 os.system('cls' if os.name == 'nt' else 'clear')
 print('****** Adventure Game ****** \n')
 playerName = input("Your name: ")
@@ -63,14 +62,40 @@ playerName = input("Your name: ")
 # Make a new player object that is currently in the 'outside' room.
 player = Player(playerName, current_room=room['outside'])
 os.system('cls' if os.name == 'nt' else 'clear')
-print('****** Adventure Game ****** \n')
+
+
+# Parser
+def Parser(selection):
+    list = selection.split(' ')
+    # Drop
+    playerItems = player.inventory
+    dropItem = ''
+    for i in list:
+        for x in playerItems:
+            if i == x.name:
+                dropItem = i
+    # Get
+    roomItems = player.current_room.items
+    getItem = ''
+    for i in list:
+        for y in roomItems:
+            if i == y.name:
+                getItem = i
+
+    # Logic
+    if ("get" or "take") in list:
+        player.pickup_item(getItem)
+    elif "drop" in list:
+        print('drop if')
+        player.drop_item(dropItem)
+
 
 print(
-    f'\nWelcome {player.name} \n\n_________________________________________')
+    f'****** Adventure Game ****** \n\nWelcome {player.name} \n\n_________________________________________')
 
 # Write a loop that:
 selection = str(input(
-    "[N] Move North  [S] Move South  [E] Move East  [W] Move West  \n[I] Inventory  [P] Pick Up Item  [D] Drop Item  [Q] Quit\n")).upper()
+    "[N] Move North  [S] Move South  [E] Move East  [W] Move West  \n[A] Action  [I] Inventory  [P] Pick Up Item  [D] Drop Item  [Q] Quit\n-> ")).upper()
 
 os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -92,6 +117,13 @@ while not selection == 'Q':
         player.move(selection)
         player.check_status()
 
+    elif selection == 'A':
+        selection = str(input("What would you like to do?\n-> "))
+        Parser(selection)
+        player.check_status()
+        print('\n')
+        player.check_inventory()
+
     elif selection == 'P':
         selection = str(input("Pickup item: "))
         print('\n')
@@ -107,7 +139,7 @@ while not selection == 'Q':
         player.check_inventory()
 
     elif selection == 'D':
-        selection = str(input("Which item would you like to drop?  "))
+        selection = str(input("Which item would you like to drop?\n-> "))
         print('\n')
         player.drop_item(selection)
 
@@ -122,7 +154,7 @@ while not selection == 'Q':
 
     print('_________________________________________')
     selection = str(
-        input("[N] Move North  [S] Move South  [E] Move East  [W] Move West  \n[I] Inventory  [P] Pick Up Item  [D] Drop Item  [Q] Quit\n"))
+        input("[N] Move North  [S] Move South  [E] Move East  [W] Move West  \n[A] Action  [I] Inventory  [P] Pick Up Item  [D] Drop Item  [Q] Quit\n-> "))
     selection = selection.upper()
     os.system('cls' if os.name == 'nt' else 'clear')
 

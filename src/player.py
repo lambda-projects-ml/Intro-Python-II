@@ -18,28 +18,27 @@ class Player:
 
         if new_room == 'n':
             if self.current_room.n_to == 'none':
-                print("No room that directions \n")
+                print("No room that directions \n\n")
             else:
                 self.current_room = self.current_room.n_to
         elif new_room == 's':
             if self.current_room.s_to == 'none':
-                print("No room that directions \n")
+                print("No room that directions \n\n")
             else:
                 self.current_room = self.current_room.s_to
         elif new_room == 'e':
             if self.current_room.e_to == 'none':
-                print("No room that directions \n")
+                print("No room that directions \n\n")
             else:
                 self.current_room = self.current_room.e_to
         elif new_room == 'w':
             if self.current_room.w_to == 'none':
-                print("No room that directions \n")
+                print("No room that directions \n\n")
             else:
                 self.current_room = self.current_room.w_to
 
 
 # Check Inventory
-
 
     def check_inventory(self):
         print("Inventory:")
@@ -81,7 +80,7 @@ class Player:
                         x = 2
 
             if x == 0:
-                print("No items in the room")
+                print(f'\n\nThe item {item} is not in the room. \n\n')
             elif x == 2:
                 print(
                     f'Unable to carry {i.name}, not enought carry weight available. Please drop another item first.')
