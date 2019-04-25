@@ -40,7 +40,6 @@ class Player:
 
 # Check Inventory
 
-
     def check_inventory(self):
         print("Inventory:")
         for i in self.inventory:
@@ -64,24 +63,34 @@ class Player:
 
 # Pickup item
     def pickup_item(self, item):
-        x=0 
+        x = 0
         if len(self.current_room.items) == 0:
             print("No items to pickup")
         else:
             for i in self.current_room.items:
                 if i.name.capitalize() == item.capitalize():
                     self.inventory.append(i)
+                    self.current_room.items.remove(i)
                     print(f'You picked up a {i.name}')
-                    x= 1
-                
-            if x==0:
+                    x = 1
+
+            if x == 0:
                 print("No items in the room")
 
     def drop_item(self, item):
-        if item in self.inventory:
-            self.inventory.remove(item)
+        x = 0
+        if len(self.inventory) == 0:
+            print("No items to drop")
         else:
-            print("Item not in invetory")
+            for i in self.inventory:
+                if i.name.capitalize() == item.capitalize():
+                    self.inventory.remove(i)
+                    self.current_room.items.append(i)
+                    print(f'You dropped a {i.name}\n')
+                    x = 1
+
+            if x == 0:
+                print("Item not in invetory")
 
     def __str__(self):
         return f'Player: {self.name}  {self.current_room}'
