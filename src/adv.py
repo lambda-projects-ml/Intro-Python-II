@@ -38,7 +38,7 @@ room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
 # select random room
-random = random.choice(list(room.keys()))
+# random = random.choice(list(room.keys()))
 
 # Create Items
 sword = Item('sword', 'Very big sword', '3')
@@ -52,15 +52,16 @@ room['outside'].add_item(bow)
 
 
 def randomize_key():
-    random = random.choice(list(room.keys()))
+    ran_item = random.choice(list(room.keys()))
+    if random == 'treasure':
+        randomize_key()
+    else:
+        room[ran_item].add_item(key)
 
 
-room[random].add_item(key)
-
-
-#
-# Main
-#
+    #
+    # Main
+    #
 os.system('cls' if os.name == 'nt' else 'clear')
 print('****** Adventure Game ****** \n')
 playerName = input("Your name: ")
