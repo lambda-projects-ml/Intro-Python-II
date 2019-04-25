@@ -42,12 +42,12 @@ random = random.choice(list(room.keys()))
 
 # Create Items
 sword = Item('sword', 'Very big sword', '5')
-bow = Item('bow', 'so fast', '3')
+bow = Item('bow', 'so fast', '6')
 light = Item('light', 'much bright', '1')
 key = Item('key', 'The one and only', '1')
 
 # Assign items to room
-room[random].add_item(sword)
+room['outside'].add_item(sword)
 room['outside'].add_item(bow)
 room[random].add_item(key)
 
@@ -102,6 +102,8 @@ while not selection == 'Q':
         player.check_inventory()
 
     elif selection == 'I':
+        player.check_status()
+        print('\n')
         player.check_inventory()
 
     elif selection == 'D':
@@ -113,7 +115,6 @@ while not selection == 'Q':
         player.check_for_items()
 
     elif selection == 'Q':
-        print('Goodbye')
         break
 
     else:

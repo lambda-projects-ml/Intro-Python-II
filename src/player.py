@@ -40,6 +40,7 @@ class Player:
 
 # Check Inventory
 
+
     def check_inventory(self):
         print("Inventory:")
         for i in self.inventory:
@@ -69,14 +70,21 @@ class Player:
         else:
             for i in self.current_room.items:
                 if i.name.capitalize() == item.capitalize():
-                    self.inventory.append(i)
-                    self.current_room.items.remove(i)
-                    self.carryWeight -= int(i.weight)
-                    print(f'You picked up a {i.name}')
-                    x = 1
+                    weight = self.carryWeight - int(i.weight)
+                    if weight >= 0:
+                        self.carryWeight -= int(i.weight)
+                        self.inventory.append(i)
+                        self.current_room.items.remove(i)
+                        x = 1
+                        print(f'You picked up a {i.name}')
+                    else:
+                        x = 2
 
             if x == 0:
                 print("No items in the room")
+            elif x == 2:
+                print(
+                    f'Unable to carry {i.name}, not enought carry weight available. Please drop another item first.')
 
     def drop_item(self, item):
         x = 0
